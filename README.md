@@ -38,6 +38,13 @@ Test configuration file :
 suricata -T -c /etc/suricata/suricata.yaml -v
 ```
 
+Test suricata :
+
+```
+curl http://testmynids.org/uid/index.html
+grep 2100498 /var/log/suricata/fast.log
+```
+
 # Arkime
 
 # PolarProxy
