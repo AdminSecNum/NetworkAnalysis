@@ -15,9 +15,9 @@ suricata-update -o /etc/suricata/rules
 Create Dummy Interface for replay PCAP in `/etc/network/interface`
 
 ```
-auto dummy0
-iface dummy0 inet static
-    address 169.254.0.1/24
+#ip link add dummy0 type dummy
+echo "dummy" >> /etc/modules
+ip link add dummy0 type dummy
 ```
 
 Configure yaml `nano /etc/suricata/suricata.yaml`
