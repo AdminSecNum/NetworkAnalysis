@@ -2,6 +2,42 @@
 
 # Suricata
 
+```
+apt install suricata
+```
+
+Update Rules :
+
+```
+suricata-update -o /etc/suricata/rules
+```
+
+Create Dummy Interface for replay PCAP in `/etc/network/interface`
+
+```
+auto dummy0
+iface dummy0 inet static
+    address 169.254.0.1/24
+```
+
+Configure yaml `nano /etc/suricata/suricata.yaml`
+
+```
+# Configure Interface
+af-packet:
+  - interface: eth0
+
+# Configure Live rule reload
+detect-engine:
+  - rule-reload: true
+```
+
+Test configuration file :
+
+```
+suricata -T -c /etc/suricata/suricata.yaml -v
+```
+
 # Arkime
 
 # PolarProxy
