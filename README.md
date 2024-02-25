@@ -15,9 +15,20 @@ suricata-update -o /etc/suricata/rules
 Create Dummy Interface for replay PCAP in `/etc/network/interface`
 
 ```
-#ip link add dummy0 type dummy
-echo "dummy" >> /etc/modules
-ip link add dummy0 type dummy
+# Create interface
+/etc/systemd/network/10-dummy0.netdev
+
+[NetDev]
+Name=dummy0
+Kind=dummy
+# Create network file
+/etc/systemd/network/0-dummy0.network
+
+[Match]
+Name=dummy0
+
+[Network]
+Address=169.254.0.1/24
 ```
 
 Configure yaml `nano /etc/suricata/suricata.yaml`
@@ -55,7 +66,7 @@ grep 2100498 /var/log/suricata/fast.log
 
 ```
 server {
-    listen 443;
+    listen 443 ssl;
     server_name example.com;
     ssl_certificate /path/to/certificate.crt;
     ssl_certificate_key /path/to/private.key;
