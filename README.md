@@ -9,7 +9,7 @@ http://deb.debian.org/debian/pool/main/s/squid/
 Generate ssl db
 
 ```
-/usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ -M 4MB
+/usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ssl_db -M 4MB
 ```
 add option to `/etc/squid/squid.conf`
 
