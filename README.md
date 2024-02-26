@@ -1,5 +1,30 @@
 # NetworkAnalysis
 
+# Squid 
+
+Download opensquid-ssl
+
+http://deb.debian.org/debian/pool/main/s/squid/
+
+Generate ssl db
+
+```
+/usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ -M 4MB
+```
+add option to `/etc/squid/squid.conf`
+
+```
+sslcrtd_program /usr/lib/squid/security_file_certgen -s /var/spool/squid/ssl_db -M 4MB
+sslcrtd_children 5
+ssl_bump server-first all
+sslproxy_cert_error allow all
+```
+and add 
+
+```
+http_port 3128 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/etc/squid/myCA.pem
+```
+
 # Suricata
 
 ```
