@@ -8,6 +8,12 @@ Download opensquid-ssl
 apt install squid-openssl
 ```
 
+Genreate Certificat
+
+```
+openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/squid/myCA.pem -out /etc/squid/myCA.pem
+```
+
 Generate ssl db
 
 ```
