@@ -224,8 +224,11 @@ ufw enable
 ufw reload 
 ```
 
-Add to the top of `/etc/ufw/before.rules`
+Connfigure proxy
+https://www.netresec.com/?page=PolarProxy
 
+You can Add to the top of `/etc/ufw/before.rules`
+<!> Debug 
 ```
 *nat
 :PREROUTING ACCEPT [0:0]
