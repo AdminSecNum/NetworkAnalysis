@@ -33,7 +33,7 @@ Remove Comment in conf file
 
 ```
 mv /etc/squid/squid.conf /etc/squid/squid.conf.original
-grep -v '^#' /etc/squid/squid.conf | uniq | sort > /etc/squid/squid.conf
+grep -v '^#' /etc/squid/squid.conf.original | uniq | sort > /etc/squid/squid.conf
 ```
 
 add option to `/etc/squid/squid.conf`
