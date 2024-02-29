@@ -150,10 +150,10 @@ root@polarproxy:~# runlevel
 N 5
 ```
 
-Add the commands above to /etc/rc{RUNLEVEL}.d before "exit 0" to have the network interface automatically configured after reboots.
+Add the commands to /etc/rc{RUNLEVEL}.d/S99add_dummy_interface
 
-/etc/rc0.d/K01networking
 ```
+#!/bin/bash
 ip link add decrypted type dummy
 ip link set decrypted arp off up
 ```
