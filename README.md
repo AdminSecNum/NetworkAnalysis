@@ -159,6 +159,59 @@ systemctl enable PolarProxy.service
 systemctl start PolarProxy.service 
 ```
 
+if bug change user to root and 
+
+```
+systemctl daemon-reload
+```
+
+Install TCPReplay
+
+```
+apt install tcpreplay
+```
+
+Launch the replay with 
+
+```
+nc localhost 57012 | tcpreplay -i decrypted -t -
+```
+
+Create TCPReplay Service
+
+in `/etc/systemd/system/tcpreplay.service`
+
+```
+[Unit]
+Description=Tcpreplay of decrypted traffic from PolarProxy
+After=PolarProxy.service
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'nc localhost 57012 | tcpreplay -i decrypted -t -'
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Start Service
+
+```
+systemctl enable tcpreplay.service
+systemctl start tcpreplay.service
+```
+
+
+Configure the client
+
+Get the polarcert and install it :
+
+```
+http://<IP>:10443/
+```
+
 # MitmProxy
 
 ```
