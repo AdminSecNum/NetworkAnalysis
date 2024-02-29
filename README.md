@@ -131,12 +131,23 @@ grep 2100498 /var/log/suricata/fast.log
 ```
 # PolarProxy
 
+https://www.netresec.com/?page=Blog&month=2020-01&post=Sniffing-Decrypted-TLS-Traffic-with-Security-Onion
+
 Prepare Requirement
 
 ```
 adduser --system --shell /bin/bash proxyuser
 mkdir /var/log/PolarProxy
 chown proxyuser:root /var/log/PolarProxy/
+```
+
+Create Dummy Interface
+
+Add the commands above to /etc/rc.local before "exit 0" to have the network interface automatically configured after reboots.
+/etc/rc0.d/K01networking
+```
+ip link add decrypted type dummy
+ip link set decrypted arp off up
 ```
 
 Download and install PolarProxyService
@@ -201,6 +212,23 @@ Start Service
 ```
 systemctl enable tcpreplay.service
 systemctl start tcpreplay.service
+```
+
+Configure firewall
+
+```
+ufw allow 22/TCP
+ufw allow in 10443/tcp
+ufw allow in 10080/tcp
+```
+
+Add to the top of `/etc/ufw/before.rules`
+
+```
+*nat
+:PREROUTING ACCEPT [0:0]
+-A PREROUTING -i enp0s3 -p tcp --dport 443 -j REDIRECT --to 10443
+COMMIT
 ```
 
 
