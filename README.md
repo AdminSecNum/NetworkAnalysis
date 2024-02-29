@@ -14,6 +14,15 @@ Genreate Certificat
 openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/squid/myCA.pem -out /etc/squid/myCA.pem
 ```
 
+V2
+
+```
+openssl req -new -newkey rsa:2048 -days 999 -nodes -x509 -keyout /etc/squid/bump.key -out /etc/squid/bump.crt
+openssl x509 -in bump.crt -outform DER -out bump.der
+openssl dhparam -outform PEM -out /etc/squid/bump_dhparam.pem 2048
+```
+
+
 Generate ssl db
 
 ```
@@ -39,6 +48,11 @@ and add
 
 ```
 http_port 3128 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/etc/squid/myCA.pem
+```
+
+V2
+```
+http_port 3128 tcpkeepalive=60,30,3 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=20MB cert=/etc/squid/bump.crt key=/etc/squid/bump.key cipher=HIGH:MEDIUM:!LOW:!RC4:!SEED:!IDEA:!3DES:!MD5:!EXP:!PSK:!DSS options=NO_TLSv1,NO_SSLv3,NO_SSLv2,SINGLE_DH_USE,SINGLE_ECDH_USE tls-dh=prime256v1:/etc/squid/bump_dhparam.pem
 ```
 
 # Suricata
