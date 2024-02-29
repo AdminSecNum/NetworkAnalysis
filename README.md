@@ -143,7 +143,15 @@ chown proxyuser:root /var/log/PolarProxy/
 
 Create Dummy Interface
 
-Add the commands above to /etc/rc.local before "exit 0" to have the network interface automatically configured after reboots.
+You need to know your run level by taping 
+
+```
+root@polarproxy:~# runlevel
+N 5
+```
+
+Add the commands above to /etc/rc{RUNLEVEL}.d before "exit 0" to have the network interface automatically configured after reboots.
+
 /etc/rc0.d/K01networking
 ```
 ip link add decrypted type dummy
