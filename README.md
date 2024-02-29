@@ -129,10 +129,23 @@ Test suricata :
 curl http://testmynids.org/uid/index.html
 grep 2100498 /var/log/suricata/fast.log
 ```
+# PolarProxy
+
+#MitmProxy
+
+```
+apt install mitmproxy
+```
+
+```
+mitmproxy
+```
+
+Set client proxy to : `<IP>:8080` and open 
+
+http://mitm.it/
 
 # Arkime
-
-# PolarProxy
 
 # Analys Encrypt HTTPS traffic
 
