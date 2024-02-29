@@ -144,29 +144,20 @@ chown proxyuser:root /var/log/PolarProxy/
 Create Dummy Interface
 
 
-Add a script in `/etc/init.d/polarproxy`
+Add a service in `/etc/systemd/system/dummy.service`
 
 ```
-#!/bin/sh
+[Unit]
+Description=Create dummy interface
 
-### BEGIN INIT INFO
-# Provides:          polarproxy
-# Required-Start:    $local_fs
-# Required-Stop:     $local_fs
-# Default-Start:     S
-# Default-Stop:      1
-# Short-Description: start dummy
-# Description: Start dummy
-### END INIT INFO
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'ip link add decrypted type dummy && ip link set decrypted arp off up'
+Restart=on-failure
+RestartSec=3
 
-ip link add decrypted type dummy
-ip link set decrypted arp off up
-```
-
-```
-chmod +x /etc/init.d/dummy
-update-rc.d dummy defaults
-systemctl enable dummy
+[Install]
+WantedBy=multi-user.target
 ```
 
 Download and install PolarProxyService
@@ -180,6 +171,7 @@ chown -R proxyuser:root /srv/PolarProxy/
 
 Edit /etc/systemd/system/PolarProxy.service 
 Modfify the WorkingDir & ExecStart
+add After=dummy.service
 and add "--pcapoverip 57012" at the end of the ExecStart command. 
 
 Start Service
