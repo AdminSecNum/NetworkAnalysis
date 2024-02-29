@@ -155,8 +155,8 @@ Add a script in `/etc/init.d/polarproxy`
 # Required-Stop:     $local_fs
 # Default-Start:     S
 # Default-Stop:      1
-# Short-Description: start polarproxy
-# Description: Start polarproxy
+# Short-Description: start dummy
+# Description: Start dummy
 ### END INIT INFO
 
 ip link add decrypted type dummy
@@ -164,8 +164,9 @@ ip link set decrypted arp off up
 ```
 
 ```
-chmod +x /etc/init.d/polarproxy
-update-rc.d polarproxy defaults
+chmod +x /etc/init.d/dummy
+update-rc.d dummy defaults
+systemctl enable dummy
 ```
 
 Download and install PolarProxyService
