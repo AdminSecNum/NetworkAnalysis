@@ -159,6 +159,12 @@ RestartSec=3
 [Install]
 WantedBy=multi-user.target
 ```
+Start Service
+
+```
+systemctl enable PolarProxy.service
+systemctl start PolarProxy.service 
+```
 
 Download and install PolarProxyService
 
