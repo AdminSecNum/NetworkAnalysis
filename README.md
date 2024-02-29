@@ -23,8 +23,8 @@ Generate ssl db
 Remove Comment in conf file 
 
 ```
-grep -v '^#' squid.conf
-grep -v '^#' squid.conf | uniq | sort >squid.nocomment
+mv /etc/squid/squid.conf /etc/squid/squid.conf.original
+grep -v '^#' /etc/squid/squid.conf | uniq | sort > /etc/squid/squid.conf
 ```
 
 add option to `/etc/squid/squid.conf`
