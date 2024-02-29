@@ -220,6 +220,8 @@ Configure firewall
 ufw allow 22/TCP
 ufw allow in 10443/tcp
 ufw allow in 10080/tcp
+ufw enable
+ufw reload 
 ```
 
 Add to the top of `/etc/ufw/before.rules`
