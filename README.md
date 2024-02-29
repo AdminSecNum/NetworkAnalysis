@@ -212,6 +212,21 @@ Get the polarcert and install it :
 http://<IP>:10443/
 ```
 
+add the proxy to client `<IP>:10443`
+
+Configure suricata to check interface `decrypted`
+
+and test it :
+
+```
+curl --insecure --connect-to www.testmynids.org:443:127.0.0.1:10443 https://www.testmynids.org/uid/index.html
+```
+
+Check in `/var/log/suricata/fast.log`
+
+`[**] [1:2100498:7] GPL ATTACK_RESPONSE id check returned root [**] [Classification: Potentially Bad Traffic] [Priority: 2]`
+
+
 # MitmProxy
 
 ```
