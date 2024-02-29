@@ -143,19 +143,29 @@ chown proxyuser:root /var/log/PolarProxy/
 
 Create Dummy Interface
 
-You need to know your run level by taping 
+
+Add a script in `/etc/init.d/polarproxy`
 
 ```
-root@polarproxy:~# runlevel
-N 5
-```
+#!/bin/sh
 
-Add the commands to /etc/rc{RUNLEVEL}.d/S99add_dummy_interface
+### BEGIN INIT INFO
+# Provides:          polarproxy
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     S
+# Default-Stop:      1
+# Short-Description: start polarproxy
+# Description: Start polarproxy
+### END INIT INFO
 
-```
-#!/bin/bash
 ip link add decrypted type dummy
 ip link set decrypted arp off up
+```
+
+```
+chmod +x /etc/init.d/polarproxy
+update-rc.d polarproxy defaults
 ```
 
 Download and install PolarProxyService
