@@ -55,6 +55,25 @@ V2
 http_port 3128 tcpkeepalive=60,30,3 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=20MB cert=/etc/squid/bump.crt key=/etc/squid/bump.key cipher=HIGH:MEDIUM:!LOW:!RC4:!SEED:!IDEA:!3DES:!MD5:!EXP:!PSK:!DSS options=NO_TLSv1,NO_SSLv3,NO_SSLv2,SINGLE_DH_USE,SINGLE_ECDH_USE tls-dh=prime256v1:/etc/squid/bump_dhparam.pem
 ```
 
+## Allow Website
+
+```
+acl whitelist dstdomain .google.com
+http_access allow whitelist
+```
+
+or in a file
+
+```
+acl whitelist dstdomain "/etc/squid/sites.whitelist.txt"
+```
+
+## Apply Configuration
+
+```
+squid -k reconfigure
+```
+
 # Suricata
 
 ```
