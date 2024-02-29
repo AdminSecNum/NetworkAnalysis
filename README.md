@@ -18,7 +18,7 @@ V2
 
 ```
 openssl req -new -newkey rsa:2048 -days 999 -nodes -x509 -keyout /etc/squid/bump.key -out /etc/squid/bump.crt
-openssl x509 -in bump.crt -outform DER -out bump.der
+openssl x509 -in /etc/squid/bump.crt -outform DER -out /etc/squid/bump.der
 openssl dhparam -outform PEM -out /etc/squid/bump_dhparam.pem 2048
 ```
 
