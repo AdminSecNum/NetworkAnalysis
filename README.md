@@ -149,6 +149,7 @@ Add a service in `/etc/systemd/system/dummy.service`
 ```
 [Unit]
 Description=Create dummy interface
+After=network.target
 
 [Service]
 Type=simple
