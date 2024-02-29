@@ -4,13 +4,23 @@
 
 Download opensquid-ssl
 
-http://deb.debian.org/debian/pool/main/s/squid/
+```
+apt install squid-openssl
+```
 
 Generate ssl db
 
 ```
 /usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ssl_db -M 4MB
 ```
+
+Remove Comment in conf file 
+
+```
+grep -v '^#' squid.conf
+grep -v '^#' squid.conf | uniq | sort >squid.nocomment
+```
+
 add option to `/etc/squid/squid.conf`
 
 ```
