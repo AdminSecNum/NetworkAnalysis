@@ -26,7 +26,7 @@ openssl dhparam -outform PEM -out /etc/squid/bump_dhparam.pem 2048
 Generate ssl db
 
 ```
-/usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ssl_db -M 4MB
+/usr/lib/squid/security_file_certgen -c -s /var/spool/squid/ssl_db -M 20MB
 ```
 
 Remove Comment in conf file 
@@ -39,7 +39,7 @@ grep -v '^#' /etc/squid/squid.conf | uniq | sort > /etc/squid/squid.conf
 add option to `/etc/squid/squid.conf`
 
 ```
-sslcrtd_program /usr/lib/squid/security_file_certgen -s /var/spool/squid/ssl_db -M 4MB
+sslcrtd_program /usr/lib/squid/security_file_certgen -s /var/spool/squid/ssl_db -M 20MB
 sslcrtd_children 5
 ssl_bump server-first all
 sslproxy_cert_error allow all
