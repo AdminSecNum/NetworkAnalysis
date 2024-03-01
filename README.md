@@ -245,7 +245,41 @@ COMMIT
 ```
 
 
-Configure the client
+Configure the gateway
+
+```
+    Autoriser le trafic TCP entrant sur le port 10443 vers 192.168.1.55 depuis l'interface eth1 :
+        Accédez à l'interface Web de pfSense.
+        Allez dans "Firewall" > "Rules" > "LAN".
+        Cliquez sur "Add" pour ajouter une nouvelle règle.
+        Définissez l'interface en tant que LAN.
+        Définissez la source comme n'importe quelle.
+        Définissez la destination comme Single Host ou Network, avec l'adresse IP 192.168.1.55.
+        Définissez le protocole comme TCP.
+        Définissez le port de destination comme 10443.
+        Cliquez sur "Save" pour enregistrer la règle.
+
+    Rediriger le trafic TCP entrant sur le port 443 vers 192.168.1.55:10443 :
+        Allez dans "Firewall" > "NAT" > "Port Forward".
+        Cliquez sur "Add" pour ajouter une nouvelle règle.
+        Définissez l'interface source comme WAN ou l'interface appropriée.
+        Définissez le protocole comme TCP.
+        Définissez le port de destination comme 443.
+        Définissez l'adresse IP de destination comme 192.168.1.55.
+        Définissez le port de redirection comme 10443.
+        Cliquez sur "Save" pour enregistrer la règle.
+
+    Masquer l'adresse source du trafic sortant :
+        Allez dans "Firewall" > "NAT" > "Outbound".
+        Choisissez "Manual Outbound NAT rule generation".
+        Cliquez sur "Add" pour ajouter une nouvelle règle.
+        Définissez l'interface source comme LAN.
+        Définissez l'adresse source comme n'importe quelle.
+        Définissez le protocole comme TCP.
+        Définissez le port source comme 10443.
+        Définissez la translation comme "Interface Address".
+        Cliquez sur "Save" pour enregistrer la règle.
+```
 
 Get the polarcert and install it :
 
