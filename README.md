@@ -11,12 +11,6 @@ apt install squid-openssl
 Genreate Certificat
 
 ```
-openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout /etc/squid/myCA.pem -out /etc/squid/myCA.pem
-```
-
-V2
-
-```
 openssl req -new -newkey rsa:2048 -days 999 -nodes -x509 -keyout /etc/squid/bump.key -out /etc/squid/bump.crt
 openssl x509 -in /etc/squid/bump.crt -outform DER -out /etc/squid/bump.der
 openssl dhparam -outform PEM -out /etc/squid/bump_dhparam.pem 2048
@@ -45,10 +39,6 @@ ssl_bump server-first all
 sslproxy_cert_error allow all
 ```
 and add 
-
-```
-http_port 3128 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/etc/squid/myCA.pem
-```
 
 V2
 ```
