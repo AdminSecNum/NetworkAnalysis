@@ -235,6 +235,12 @@ ufw reload
 Connfigure proxy
 https://www.netresec.com/?page=PolarProxy
 
+Test on client with openssl
+
+```
+openssl s_client -connect www.netresec.com:443 -CApath /etc/ssl/certs
+```
+
 You can Add to the top of `/etc/ufw/before.rules`
 <!> Debug 
 ```
