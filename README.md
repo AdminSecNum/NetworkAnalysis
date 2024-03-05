@@ -2,62 +2,6 @@
 
 
 
-# Suricata
-
-```
-apt install suricata
-```
-
-Update Rules :
-
-```
-suricata-update -o /etc/suricata/rules
-```
-
-Create Dummy Interface for replay PCAP in `/etc/network/interface`
-
-```
-# Create interface
-/etc/systemd/network/10-dummy0.netdev
-
-[NetDev]
-Name=dummy0
-Kind=dummy
-# Create network file
-/etc/systemd/network/0-dummy0.network
-
-[Match]
-Name=dummy0
-
-[Network]
-Address=169.254.0.1/24
-```
-
-Configure yaml `nano /etc/suricata/suricata.yaml`
-
-```
-# Configure Interface
-af-packet:
-  - interface: eth0
-
-# Configure Live rule reload
-detect-engine:
-  - rule-reload: true
-```
-
-Test configuration file :
-
-```
-suricata -T -c /etc/suricata/suricata.yaml -v
-```
-
-Test suricata :
-
-```
-curl http://testmynids.org/uid/index.html
-grep 2100498 /var/log/suricata/fast.log
-```
-
 # MitmProxy
 
 ```
@@ -96,6 +40,3 @@ server {
     }
 }
 ```
-
-
-## Install Suricata
